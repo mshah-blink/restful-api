@@ -13,6 +13,6 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::apiResource('users', UserController::class)->middleware('auth:sanctum');
-Route::apiResource('orders', ProductController::class)->middleware('auth:sanctum');
+Route::apiResource('products', ProductController::class)->middleware('auth:sanctum');
 Route::apiResource('customers', CustomerController::class)->middleware('auth:sanctum');
 Route::apiResource('orders', OrderController::class)->middleware('auth:sanctum');

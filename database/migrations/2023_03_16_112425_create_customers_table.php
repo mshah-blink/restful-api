@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('mobile');
             $table->string('address1');
-            $table->string('address2');
+            $table->string('address2')->nullable();
             $table->string('city');
             $table->string('state');
             $table->string('zip');
+            $table->string('country');
             $table->timestamps();
         });
     }

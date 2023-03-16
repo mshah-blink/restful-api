@@ -21,7 +21,14 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'customer_id' => 'required|exists:customers,id',
+            'product_id' => 'required|exists:products,id',
+            'quantity' => 'required|integer',
+            'value' => 'required|decimal:0,2|max:255',
+        ]);
+
+        return Order::create($request->all());
     }
 
     /**

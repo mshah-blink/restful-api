@@ -21,7 +21,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|unique:products|max:255',
+            'category' => 'required|string|max:255',
+            'color' => 'required|string|max:255',
+            'price' => 'required|decimal:0,2|max:255',
+            'size' => 'required|string|max:255',
+        ]);
+
+        return Product::create($request->all());
     }
 
     /**
@@ -45,6 +53,6 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return 'hi';
     }
 }

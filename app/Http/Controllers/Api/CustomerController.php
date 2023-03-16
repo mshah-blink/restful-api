@@ -21,7 +21,19 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'mobile' => 'required|string|max:255',
+            'address1' => 'required|string|max:255',
+            'address2' => 'nullable|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:255',
+            'zip' => 'required|string|max:255',
+            'country' => 'required|string|max:255',
+        ]);
+
+        return Customer::create($request->all());
     }
 
     /**
