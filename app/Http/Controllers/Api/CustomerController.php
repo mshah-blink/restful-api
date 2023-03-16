@@ -41,7 +41,7 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return Customer::find($id);
     }
 
     /**
