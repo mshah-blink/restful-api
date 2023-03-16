@@ -53,6 +53,6 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        return 'hi';
+        return Product::where('id', $id)->delete();
     }
 }

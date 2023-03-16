@@ -57,6 +57,6 @@ class CustomerController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return Customer::where('id', $id)->delete();
     }
 }

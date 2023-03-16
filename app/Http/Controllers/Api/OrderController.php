@@ -52,6 +52,6 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return Order::where('id', $id)->delete();
     }
 }
