@@ -38,7 +38,9 @@ class OrderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $order = Order::findOrFail($id);
+        $order->update($request->all());
+        return $order;
     }
 
     /**

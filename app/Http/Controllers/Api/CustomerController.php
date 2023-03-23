@@ -15,7 +15,8 @@ class CustomerController extends Controller
     public function index()
     {
         try {
-            return response()->json(Customer::all(), 200);
+            $customers = Customer::all();
+            return response()->json($customers, 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'message' => $th->getMessage()], 500);
         }
@@ -34,10 +35,9 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        return Customer::findOrFail($id);
         try {
-            $customers = Customer::all();
-            return response()->json($customers[0], 200);
+            $customer = Customer::findOrFail($id);
+            return response()->json($customer, 200);
         } catch (\Throwable $th) {
             return response()->json(['status' => false, 'message' => $th->getMessage()], 500);
         }
@@ -48,7 +48,9 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $customer = Customer::findOrFail($id);
+        $customer->update($request->all());
+        return $customer;
     }
 
     /**
