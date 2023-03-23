@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -19,16 +20,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|unique:products|max:255',
-            'category' => 'required|string|max:255',
-            'color' => 'required|string|max:255',
-            'price' => 'required|decimal:0,2|max:255',
-            'size' => 'required|string|max:255',
-        ]);
-
         return Product::create($request->all());
     }
 
@@ -37,7 +30,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        return Product::find($id);
+        return Product::findOrFail($id);
     }
 
     /**

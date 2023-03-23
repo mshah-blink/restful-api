@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 
@@ -13,26 +14,18 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return Customer::all();
+        try {
+            return response()->json(Customer::all(), 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'message' => $th->getMessage()], 500);
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'mobile' => 'required|string|max:255',
-            'address1' => 'required|string|max:255',
-            'address2' => 'nullable|string|max:255',
-            'city' => 'required|string|max:255',
-            'state' => 'required|string|max:255',
-            'zip' => 'required|string|max:255',
-            'country' => 'required|string|max:255',
-        ]);
-
         return Customer::create($request->all());
     }
 
@@ -41,7 +34,13 @@ class CustomerController extends Controller
      */
     public function show(string $id)
     {
-        return Customer::find($id);
+        return Customer::findOrFail($id);
+        try {
+            $customers = Customer::all();
+            return response()->json($customers[0], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'message' => $th->getMessage()], 500);
+        }
     }
 
     /**

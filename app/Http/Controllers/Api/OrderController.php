@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -19,15 +20,8 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(OrderRequest $request)
     {
-        $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer',
-            'value' => 'required|decimal:0,2|max:255',
-        ]);
-
         return Order::create($request->all());
     }
 
@@ -36,7 +30,7 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        return Order::find($id);
+        return Order::findOrFail($id);
     }
 
     /**
