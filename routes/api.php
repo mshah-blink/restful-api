@@ -14,7 +14,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::get('tests', function () {
-    User::all();
+    User::all()->toJson();
 });
 
 
