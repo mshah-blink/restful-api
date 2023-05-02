@@ -13,11 +13,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/auth/login', 'login');
 });
 
-Route::get('tests', function () {
-    return User::all()->toJson();
-});
-
-
 Route::apiResource('users', UserController::class)->middleware('auth:sanctum');
 Route::apiResource('products', ProductController::class)->middleware('auth:sanctum');
 Route::apiResource('customers', CustomerController::class)->middleware('auth:sanctum');
