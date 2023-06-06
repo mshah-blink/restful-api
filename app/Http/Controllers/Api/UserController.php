@@ -45,6 +45,6 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return User::where('id', $id)->delete();
     }
 }
